@@ -6,11 +6,11 @@ import {
   getRandomChar,
   getRandomInt,
   type VehicleProperties,
-} from '@overextended/ox_lib';
+} from '@communityox/ox_lib';
 import { PLATE_PATTERN } from '../../common/config';
 import type { Dict, VehicleData } from 'types';
 import { GetVehicleData, GetVehicleNetworkType } from '../../common/vehicles';
-import { setVehicleProperties } from '@overextended/ox_lib/server';
+import { setVehicleProperties } from '@communityox/ox_lib/server';
 import { Vector3 } from '@nativewrappers/server';
 import { SpawnVehicle } from 'vehicle';
 

@@ -1,5 +1,5 @@
 import { db } from '../db';
-import type { VehicleProperties } from '@overextended/ox_lib';
+import type { VehicleProperties } from '@communityox/ox_lib';
 import { DEFAULT_VEHICLE_STORE } from 'config';
 
 export type VehicleRow = {

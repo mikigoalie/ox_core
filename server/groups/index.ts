@@ -1,4 +1,4 @@
-import { addAce, addCommand, addPrincipal, removeAce, removePrincipal } from '@overextended/ox_lib/server';
+import { addAce, addCommand, addPrincipal, removeAce, removePrincipal } from '@communityox/ox_lib/server';
 import { InsertGroup, RemoveGroup, SelectGroups } from './db';
 import { OxPlayer } from 'player/class';
 import type { Dict, OxGroup, DbGroup, CreateGroupProperties, OxAccountRole } from 'types';

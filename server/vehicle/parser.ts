@@ -1,4 +1,4 @@
-import { addCommand, triggerClientCallback } from '@overextended/ox_lib/server';
+import { addCommand, triggerClientCallback } from '@communityox/ox_lib/server';
 import { GetTopVehicleStats, GetVehicleData } from '../../common/vehicles';
 import type { VehicleData, TopVehicleStats } from 'types';
 

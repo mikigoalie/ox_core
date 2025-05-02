@@ -11,11 +11,11 @@ import {
   SaveCharacterData,
   UpdateCharacterLicense,
 } from './db';
-import { getRandomChar, getRandomInt } from '@overextended/ox_lib';
+import { getRandomChar, getRandomInt } from '@communityox/ox_lib';
 import { GetGroup, GetGroupsByType } from 'groups';
 import { GeneratePhoneNumber } from 'bridge/npwd';
 import { Statuses } from './status';
-import { addPrincipal, removePrincipal } from '@overextended/ox_lib/server';
+import { addPrincipal, removePrincipal } from '@communityox/ox_lib/server';
 import {
   AddCharacterGroup,
   GetCharacterGroups,

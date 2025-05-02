@@ -5,7 +5,7 @@ import { DEBUG } from '../../common/config';
 import './class';
 import './commands';
 import './events';
-import type { VehicleProperties } from '@overextended/ox_lib/server';
+import type { VehicleProperties } from '@communityox/ox_lib/server';
 
 if (DEBUG) import('./parser');
 

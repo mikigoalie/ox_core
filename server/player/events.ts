@@ -1,6 +1,6 @@
-import { onClientCallback } from '@overextended/ox_lib/server';
+import { onClientCallback } from '@communityox/ox_lib/server';
 import { OxPlayer } from './class';
-import { sleep } from '@overextended/ox_lib';
+import { sleep } from '@communityox/ox_lib';
 import { db } from 'db';
 import { Statuses } from './status';
 import { CreateNewAccount } from 'accounts/db';
