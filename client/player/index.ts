@@ -140,6 +140,23 @@ class PlayerSingleton {
     return this.getGroup(groups);
   }
 
+
+  getGroupsByType(type: string): Record<string, number> {
+    const groupNames: string[] = GlobalState.groups;
+    const result: Record<string, number> = {};
+
+    for (const groupName of groupNames) {
+      const group: OxGroup = GlobalState[`group.${groupName}`];
+
+      if (group.type === type && this.#groups[groupName] !== undefined) {
+        result[groupName] = this.#groups[groupName];
+      }
+    }
+
+    return result;
+  }
+
+
   getGroups() {
     return this.#groups;
   }
