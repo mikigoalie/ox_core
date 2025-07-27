@@ -237,18 +237,6 @@ export class OxPlayer extends ClassInterface {
         this.#removeGroup(group, currentGrade, false);
         this.#addGroup(group, grade);
       } else {
-        const relatedGroups = group.type && GetGroupsByType(group.type);
-
-        if (
-          relatedGroups &&
-          relatedGroups.some((name) => {
-            return name in this.#groups;
-          })
-        )
-          return console.warn(
-            `Failed to set OxPlayer<${this.userId}> ${group.name}:${grade} (already has group of type '${group.type}')`,
-          );
-
         if (!(await AddCharacterGroup(this.charId, group.name, grade))) return;
 
         this.#addGroup(group, grade);
@@ -286,6 +274,20 @@ export class OxPlayer extends ClassInterface {
 
   getGroupByType(type: string) {
     return this.getGroup(GetGroupsByType(type));
+  }
+
+  getGroupsByType(type: string): [string, number][] {
+    const groupNames = GetGroupsByType(type);
+    const result: [string, number][] = [];
+
+    for (const name of groupNames) {
+      const grade = this.#groups[name];
+      if (grade) {
+        result.push([name, grade]);
+      }
+    }
+
+    return result;
   }
 
   getGroups() {
