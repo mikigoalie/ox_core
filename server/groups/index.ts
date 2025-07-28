@@ -1,5 +1,5 @@
 import { addAce, addCommand, addPrincipal, removeAce, removePrincipal } from '@communityox/ox_lib/server';
-import { InsertGroup, RemoveGroup, SelectGroups } from './db';
+import { InsertGroup, RemoveGroup, SelectGroups, SelectSingleGroup } from './db';
 import { OxPlayer } from 'player/class';
 import type { Dict, OxGroup, DbGroup, CreateGroupProperties, OxAccountRole } from 'types';
 import { GetGroupPermissions } from '../../common';
@@ -164,10 +164,21 @@ export async function DeleteGroup(groupName: string) {
   delete groups[group.name];
 }
 
-async function LoadGroups() {
+export async function LoadGroups() {
   const dbGroups = await SelectGroups();
   GlobalState.groups = dbGroups.map((group) => SetupGroup(group).name);
 }
+
+export async function LoadGroup(name: string) {
+  const dbGroup = await SelectSingleGroup(name);
+  if (!dbGroup) throw new Error(`Cannot load OxGroup<${name}> (no group exists with that name)`);
+
+  GlobalState.groups = Array.from(new Set([
+    ...GlobalState.groups,
+    SetupGroup(dbGroup).name,
+  ]));
+}
+
 
 setImmediate(LoadGroups);
 
@@ -175,6 +186,7 @@ addCommand('reloadgroups', LoadGroups, {
   help: 'Reload groups from the database.',
   restricted: 'group.admin',
 });
+
 
 addCommand<{ target: string; group: string; grade?: number }>(
   'setgroup',
@@ -206,3 +218,5 @@ exports('CreateGroup', CreateGroup);
 exports('DeleteGroup', DeleteGroup);
 exports('GetGroupActivePlayers', GetGroupActivePlayers);
 exports('GetGroupActivePlayersByType', GetGroupActivePlayersByType);
+exports('LoadAllGroups', LoadGroups);
+exports('LoadGroup', LoadGroup);

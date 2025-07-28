@@ -1,7 +1,26 @@
 import { GetConnection, db } from 'db';
 import type { UpsertResult } from 'mariadb';
 import type { DbGroup } from 'types';
+export async function SelectSingleGroup(name: string): Promise<DbGroup | undefined> {
+  const result = await db.query<DbGroup>(`
+    SELECT 
+      ox_groups.*,
+      JSON_OBJECTAGG(ox_group_grades.grade, ox_group_grades.accountRole) AS accountRoles,
+      JSON_ARRAYAGG(ox_group_grades.label ORDER BY ox_group_grades.grade) AS grades
+    FROM 
+        ox_groups
+    JOIN 
+        ox_group_grades
+    ON
+        ox_groups.name = ox_group_grades.group
+    WHERE 
+        ox_groups.name = ?
+    GROUP BY 
+        ox_groups.name;
+  `, [name]);
 
+  return result[0];
+}
 export function SelectGroups() {
   return db.query<DbGroup>(`
     SELECT 
